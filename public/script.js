@@ -1,24 +1,29 @@
 const tasksDOM = document.querySelector('.tasks');
 const formDOM = document.querySelector('.task-form');
-const taskInputDOM = document.querySelector('.task-input')
+const sakeinputDOM = document.getElementById('sake-input');
+// const saketypeDOM = document.getElementById('saketype-input');
 const formAlertDOM = document.querySelector('.form-alert');
+const saketypeDOM = document.getElementById('saketype');
+
+
 // /api/v1/tasksからタスクを読み込む
 const showTasks = async () =>{
     try {
         //実作apiにアクセス
         const {data: tasks} = await axios.get("/api/v1/tasks");
         //タスクがない時の表示
-        console.log(tasks.length);
+        // console.log(tasks[0]._id);
         if(tasks.length < 1){
-            tasksDOM.innerHTML = `<h5 class="empty-list">タスクがありません。</h5>`;
+            tasksDOM.innerHTML = `<h5 class="empty-list">酒のデータがありません。</h5>`;
             return
         }
         //タスクを出力
         const allTasks = tasks.map((task) => {
-            const {completed, _id, name} = task;
+            const {completed, _id, saketype, sakename} = task;
             return             `<div class="single-task ${completed && "task-completed"}">
             <h5>
-                <span><i class="far fa-check-circle"></i></span>${name}
+                <span><i class="far fa-check-circle"></i></span>${sakename}
+                <span><i ></i></span>${saketype}
             </h5>
             <div class="task-links">
                 <!-- 編集リンク -->
@@ -43,13 +48,16 @@ showTasks();
 //タスクの新規作成
 formDOM.addEventListener('submit',async (event)=>{
     event.preventDefault();
-    const name = taskInputDOM.value;
+    // console.log(sakeType.value);
+    // console.log(sakeinputDOM,saketypeDOM)
+    const sakename = sakeinputDOM.value;
+    const saketype = saketypeDOM.value;
     try {
-        await axios.post("/api/v1/tasks",{name : name})
+        await axios.post("/api/v1/tasks",{sakename : sakename,saketype : saketype});
         showTasks();
-        taskInputDOM.value = "";
+        sakeinputDOM.value = "";
         formAlertDOM.style.display = "block";
-        formAlertDOM.textContent = "タスクを追加しました。";
+        formAlertDOM.textContent = "日本酒を追加しました。";
         formAlertDOM.classList.add("text-success");
     } catch (error) {
         console.log(error)
@@ -65,7 +73,7 @@ formDOM.addEventListener('submit',async (event)=>{
 //タスクの削除
 tasksDOM.addEventListener('click',async(event) => {
     const element = event.target;
-    console.log(element.parentElement);
+    // console.log(element.parentElement);
     if(element.parentElement.classList.contains("delete-btn")){
         const id = element.parentElement.dataset.id;
         // console.log(id)

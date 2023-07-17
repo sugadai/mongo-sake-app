@@ -10,9 +10,16 @@
 </head>
 <body>
     <form class="task-form">
-        <h4>Node.jsでTodoアプリ</h4>
+        <h4>飲みたい日本酒をコンプリートしよう！</h4>
         <div class="form-control">
-            <input type="text" name="name" class="task-input" placeholder="例：Node.jsnの勉強">
+            <input type="text" name="sakename" class="task-input" id="sake-input" placeholder="例：獺祭">
+            <!-- <input type="text" name="saketype" class="task-input" id="saketype-input" placeholder="例：純米吟醸酒"> -->
+            <select class="task-input" id="saketype">
+                <option value="純米酒">純米酒</option>
+                <option value="純米吟醸">純米吟醸</option>
+                <option value="純米大吟醸">純米大吟醸</option>
+            </select>
+            
             <button type="submit" class="btn submit-btn">送信</button>
         </div>
         <div class="form-alert"></div>

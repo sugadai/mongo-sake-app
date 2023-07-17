@@ -2,17 +2,21 @@
 
 var mongoose = require('mongoose');
 
-var TaskSchema = new mongoose.Schema({
-  name: {
+var sakeSchema = new mongoose.Schema({
+  sakename: {
     type: String,
-    required: [true, "タスク名を入れてください。"],
-    trim: true,
-    maxlength: [20, "タスク名は20文字以内で入力して下さい。"]
+    required: [true, "日本酒名を入れてください。"],
+    unique: true
+  },
+  saketype: {
+    type: String,
+    required: [true, "酒の種類を入力して下さい。"],
+    match: [/\.*[純米吟醸,純米,純米大吟醸]\.*/]
   },
   completed: {
     type: Boolean,
     "default": false
   }
 });
-module.exports = mongoose.model("Task", TaskSchema);
+module.exports = mongoose.model("sake", sakeSchema);
 //# sourceMappingURL=Task.dev.js.map
