@@ -1,9 +1,14 @@
 {
   "name": "mongo_node_app",
+  "engines": {
+    "node": "18.7.0",
+    "npm": "8.15.0"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "keywords": [],

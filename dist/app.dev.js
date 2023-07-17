@@ -11,7 +11,7 @@ var _require = require('./routes/tasks'),
 
 require('dotenv').config();
 
-var PORT = 5000;
+var PORT = process.env.PORT || 5000;
 
 var taskRoute = require('./routes/tasks');
 
